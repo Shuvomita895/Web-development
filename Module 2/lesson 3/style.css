@@ -1,0 +1,23 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+p {
+    font-size: 30px;
+    text-shadow: 2px 2px 10px orange;
+    box-shadow: 5px 5px 10px pink;
+}
+h1 {
+    color: rgb(16, 185, 75);
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+h2 {
+    text-decoration: line-through;
+    text-transform: lowercase;
+}
+h3 {
+    text-decoration: overline;
+}
+h4 {
+    text-decoration: overline underline;
+}
