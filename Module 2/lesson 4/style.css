@@ -1,0 +1,37 @@
+input[type="text"] {
+    border: 2px solid blue;
+}
+
+input[type="password"] {
+    border: 2px solid rgb(19, 204, 25);
+}
+
+
+ul > li {
+    color:darkred
+}
+
+h1 + p {
+font-family: fantasy;
+}
+
+a:hover{
+    font-size: 20px;
+    color: darkgreen;
+}
+ li:nth-child(3){
+    background-color: aqua;
+ }
+
+h1:before{
+    content: "🥱";
+}
+
+h1:after{
+    content: "🥱";
+}
+
+p::first-letter{
+    color: crimson;
+    font-size: 30px;
+}
