@@ -10,6 +10,29 @@
 </head>
 
 <body class="container">
+    <!--navebar-->
+    <nav class="navbar navbar-expand-lg bg-info-subtle">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MYwebsite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!--spiners-->
     <h1>Spiners</h1>
     <div class="spinner-border text-info" role="status">
@@ -20,38 +43,46 @@
     </div>
     <!--Cards-->
     <h1 class="mt-5 text-center">Cards</h1>
-    <div class="d-flex gap-4 flex-wrap justify-content-center">
+    <div class="d-flex justify-content-center mt-5 gap-4">
         <div class="card" style="width: 13rem;">
             <img style="width: 200px;" src="sherly.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Sherlock Homles Series</h5>
                 <p class="card-text">1500 bdt
-                    </p>
+                </p>
+                <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
+        </div>   
+        <div class="card" style="width: 13rem;">
+            <img style="width: 200px;" src="sherly.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Sherlock Homles Series</h5>
+                <p class="card-text">1500 bdt
+                </p>
                 <a href="#" class="btn btn-primary">Add to cart</a>
             </div>
         </div>
-        <div class="d-flex gap-4 flex-wrap justify-content-center">
-            <div class="card" style="width: 13rem;">
-                <img style="width: 200px;" src="sherly.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Sherlock Homles Series</h5>
-                    <p class="card-text">1500 bdt
-                    </p>
-                    <a href="#" class="btn btn-primary">Add to cart</a>
-                </div>
+        <div class="card" style="width: 13rem;">
+            <img style="width: 200px;" src="sherly.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Sherlock Homles Series</h5>
+                <p class="card-text">1500 bdt
+                </p>
+                <a href="#" class="btn btn-primary">Add to cart</a>
             </div>
-            <div class="d-flex gap-4 flex-wrap justify-content-center">
-                <div class="card" style="width: 13rem;">
-                    <img style="width: 200px;" src="sherly.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sherlock Homles Series</h5>
-                        <p class="card-text">1500 bdt
-                        </p>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
+        </div>
     </div>
-
+    <div class="d-flex justify-content-center mt-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
