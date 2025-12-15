@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1>Multiplication Functions</h1>
+        <p id="mul"></p>
+        <p id="demo"></p>
+        
+        <script>
+              function multiply(a, b) {
+                    if (b === undefined) {
+                        throw new Error("Two numbers are required for multiplication.");
+                    }
+                    return a * b;
+                }
+                // Usage:
+                console.log(multiply(5, 3));  // Output: 15
+                // console.log(multiply(5));   // Throws: Error: Two numbers are required for multiplication.
+            
+
+            var x = 30//global varable
+            function mul() {
+                var y = 80;//local variable
+                var result = x * y;
+                document.getElementById("mul").
+                    innerHTML = "The multiplication of x and y is:" + result;
+            }
+            mul()
+
+            document.getElementById("demo").
+                innerHTML = y;//this will cause an error because y is not defined in this scoope
+        </script>
+    </body>
+</html>
