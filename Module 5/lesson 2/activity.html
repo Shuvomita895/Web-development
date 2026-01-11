@@ -17,16 +17,16 @@
                 //creating an age method for the class student
                 age(){
                     let date = new Date();
-                    return date.getFullyear() - this.year;
+                    return date.getFullYear() - this.year;
                 }
             }
 
             //creating an object to access the class
             student1 = new student("Shuvomita","Grade 9",2010)
-            document.getElementById("student1").innerHTML = "My name is "+ student1.name + ". I am in "+student1.garde + ". I am "+student1.age() + " years old."
+            document.getElementById("student1").innerHTML = "My name is "+ student1.name + ". I am in "+student1.grade + ". I am "+student1.age() + " years old."
 
             student2 = new student("Radiya","Grade 8",2013)
-            document.getElementById("student2").innerHTML = "My name is " + student2.name + ". I am in " + student2.garde + ". I am " + student2.age() + " years old."
+            document.getElementById("student2").innerHTML = "My name is " + student2.name + ". I am in " + student2.grade + ". I am " + student2.age() + " years old."
         </script>
     </body>
 </html>
