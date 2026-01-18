@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1> JavaScript Arrays and Methods</h1>
+        <p id="fruits">The fruits array:</p>
+        <p id="ascending">The ascending order:</p>
+        <p id="descending">The descending order:</p>
+        <script>
+            // create an  array
+            var fruits = ["Apple","Banana","Mango","Orange","Kiwi"]
+            document.getElementById("fruits").innerHTML = "The fruits array: " + fruits;
+            //Sort this array
+            document.getElementById("ascending").innerHTML = "The ascending order: " + fruits.sort();
+            //reverse the array
+            document.getElementById("descending").innerHTML = "The descending order: " + fruits.reverse();
+
+        </script>
+    </body>
+</html>
