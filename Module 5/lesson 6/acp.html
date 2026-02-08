@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <form name="myForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" min="18" id="number" name="age" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        function validateForm() {
+            var name = document.forms['myForm']['name'].value;
+
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+
+            // Age validation is now handled by HTML5 (min="18" and required)
+            // If age is invalid, the browser will prevent submission before this function runs
+
+            // If name is valid, allow form submission
+            return true;
+        }
+    </script>
+</body>
+
+</html>
