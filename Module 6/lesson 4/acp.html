@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <div id="Mycalender"></div>
+
+    <script>
+        var date = new Date().getDate();
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        var today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        var calender = "Date:  " + date + "/" + month + "/" + year + " Day: " + today;
+        document.getElementById("Mycalender").innerText = calender;
+    </script>
+</body>
+
+</html>
