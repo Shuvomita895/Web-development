@@ -7,7 +7,7 @@
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         </head>
     </head>
-    <body>
+    <body class="bg-info-subtle">
         <div class="topnav">
             <a class="active" href="#home">Home</a>
             <a href="#">Projects</a>
@@ -41,10 +41,8 @@
         <div class="container mb-4">
             <h1 class="text-center mt-4">About Us</h1>
             <div class="d-flex justify-content-center">
-                <p style="width: 300px;">We are a team of passionate educators dedicated to providing high-quality online courses in programming and web
-                    development. Our mission is to empower individuals with the skills they need to succeed in the digital world. With a
-                    focus on practical, hands-on learning, we strive to create engaging and accessible content that helps our students
-                    achieve their goals.
+                <p style="width: 300px;">We are a team of passionate educators dedicated to providing high-quality online courses in programming and web development. Our mission is to empower individuals with the skills they need to succeed in the digital world. With afocus on practical, hands-on learning, we strive to create engaging and accessible content that helps our students
+                achieve their goals.
                 </p>
                     <img class="float" src="about.us..jpg" alt="">
             </div>
@@ -77,6 +75,36 @@
                         Try out our HTML course. This is beginner friendly as well as filled with the basics. You need no experience to learn this.</p>
                     <a href="#" class="btn btn-primary">Try Now</a>
                 </div>
+            </div>
+        </div>
+        <div>
+            <h1 class="text-center mt-3">Contact Us</h1>
+            <div class="container">
+                <form action="action_page.php">
+            
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+            
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+            
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                        <option value="Nepal">Nepal</option>
+                    </select>
+            
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
+            
+                    <input type="submit" value="Submit">
+            
+                </form>
             </div>
         </div>
         <div class="footer">
