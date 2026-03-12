@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <h1> JavaScript Arrays and Map</h1>
+    <p id="fruits">The fruits array:</p>
+    <p id="ascending">The ascending order:</p>
+    <p id="descending">The descending order:</p>
+    <p id="map"></p>
+    <script>
+        
+        var fruits = ["Apple", "Banana", "Mango", "Orange", "Kiwi"]
+        document.getElementById("fruits").innerHTML = "The fruits array: " + fruits;
+        
+        document.getElementById("ascending").innerHTML = "The ascending order: " + fruits.sort();
+       
+        document.getElementById("descending").innerHTML = "The descending order: " + fruits.reverse();
+         var numbers = [1, 2, 3, 4, 5];
+
+
+            function result(num) {
+                return num * 2
+            }
+
+
+            document.getElementById("map").innerHTML = numbers.map(result);
+
+    </script>
+</body>
+
+</html>
