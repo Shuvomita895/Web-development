@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuvomita Roy | Front End Developer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --accent: #00ffc4;
+            --accent-dark: #047857;
+            --border: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(23, 23, 23, 0.3);
+            --card-bg-solid: #171717;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #404040;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--text-primary) !important;
+            letter-spacing: -0.025em;
+        }
+
+        .navbar-brand span {
+            color: var(--accent);
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            padding: 8px 16px !important;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 16px;
+            right: 16px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary) !important;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            opacity: 1;
+        }
+
+        .navbar-toggler {
+            border: 1px solid var(--border-hover);
+            padding: 4px 8px;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ========== HERO ========== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top, rgba(0, 255, 196, 0.08), #050505 60%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(128, 128, 128, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(128, 128, 128, 0.02) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 600;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .accent {
+            background: linear-gradient(to bottom, #00ffc4, #047857);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn-primary-custom {
+            background: var(--accent);
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 196, 0.2);
+        }
+
+        .btn-primary-custom:hover {
+            background: #33ffd4;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 196, 0.35);
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 32px;
+            border: 1px solid var(--border-hover);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary-custom:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ========== STATS ========== */
+        .stats-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 0;
+            background: var(--bg-secondary);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 60px;
+            background: var(--border);
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 96px 0;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        /* ========== ABOUT ========== */
+        #about {
+            background: var(--bg-secondary);
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: all 0.7s ease-out;
+        }
+
+        .about-image-wrapper:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.6), transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-info-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .about-info-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+
+        .about-info-value {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ========== SKILLS ========== */
+        .skill-category {
+            margin-bottom: 40px;
+        }
+
+        .skill-category-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-category-title i {
+            color: var(--accent);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            background: rgba(0, 255, 196, 0.05);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ========== PROJECTS ========== */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+        }
+
+        .project-image {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%);
+            transition: all 0.7s ease-out;
+        }
+
+        .project-card:hover .project-image img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+
+        .project-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.8), transparent 60%);
+            pointer-events: none;
+        }
+
+        .project-number {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 196, 0.15);
+        }
+
+        .project-body {
+            padding: 24px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .project-tag {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            background: rgba(0, 255, 196, 0.08);
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-top: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+            gap: 10px;
+        }
+
+        /* ========== EXPERIENCE TIMELINE ========== */
+        .timeline-item {
+            position: relative;
+            padding-left: 32px;
+            padding-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 255, 196, 0.4);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% - 18px);
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ========== SERVICES ========== */
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.5s ease;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-hover);
+            background: rgba(23, 23, 23, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(0, 255, 196, 0.08);
+            border: 1px solid rgba(0, 255, 196, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(0, 255, 196, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 196, 0.15);
+        }
+
+        .service-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ========== TESTIMONIALS ========== */
+        #testimonials {
+            background: var(--bg-secondary);
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            height: 100%;
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .testimonial-stars {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+
+        .testimonial-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ========== CONTACT ========== */
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .contact-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 10px;
+            background: rgba(0, 255, 196, 0.08);
+            border: 1px solid rgba(0, 255, 196, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .contact-value a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent);
+        }
+
+        /* Form */
+        .form-control-custom {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 14px 18px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control-custom:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 255, 196, 0.1);
+            background: rgba(23, 23, 23, 0.5);
+        }
+
+        .form-control-custom::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.form-control-custom {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-label-custom {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0 24px;
+            background: var(--bg-primary);
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 255, 196, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            margin-top: 32px;
+            padding-top: 24px;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 100ms;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 200ms;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 300ms;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 400ms;
+        }
+
+        .reveal-delay-5 {
+            transition-delay: 500ms;
+        }
+
+        .hero-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s ease-out forwards;
+        }
+
+        .hero-fade-d1 {
+            animation-delay: 0.1s;
+        }
+
+        .hero-fade-d2 {
+            animation-delay: 0.25s;
+        }
+
+        .hero-fade-d3 {
+            animation-delay: 0.4s;
+        }
+
+        .hero-fade-d4 {
+            animation-delay: 0.55s;
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Float animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ========== TOAST ========== */
+        .toast-custom {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-bg-solid);
+            border: 1px solid rgba(0, 255, 196, 0.2);
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .toast-custom.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-custom i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        .toast-custom span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 64px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            .about-image-wrapper {
+                aspect-ratio: 3/4;
+                max-height: 400px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons a {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        /* Animated background glow */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .glow-orb-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 255, 196, 0.08);
+            top: 20%;
+            right: -5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 250px;
+            height: 250px;
+            background: rgba(4, 120, 87, 0.08);
+            bottom: 10%;
+            left: -5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container" style="max-width: 1280px;">
+            <a class="navbar-brand" href="#hero">Shuvomita<span>.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="container" style="max-width: 1280px; position: relative; z-index: 1;">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="hero-badge hero-fade hero-fade-d1">
+                        <span class="dot"></span>
+                        Available for Projects
+                    </div>
+                    <h1 class="hero-title hero-fade hero-fade-d2">
+                        Hi, I'm<br>
+                        <span class="accent">Shuvomita Roy</span>
+                    </h1>
+                    <p class="hero-subtitle hero-fade hero-fade-d3">
+                        A passionate Front End Developer crafting pixel-perfect, responsive websites.
+                        Turning ideas into beautiful digital experiences — 3+ years and counting.
+                    </p>
+                    <div class="hero-buttons hero-fade hero-fade-d4">
+                        <a href="#projects" class="btn-primary-custom">
+                            View My Work
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn-secondary-custom">
+                            <i class="bi bi-chat-dots"></i>
+                            Let's Talk
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATS ========== -->
+    <div class="stats-section">
+        <div class="container" style="max-width: 1280px;">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item reveal">
+                        <div class="stat-number" data-target="20">0+</div>
+                        <div class="stat-label">Client Projects</div>
+                    </div>
+                </div>
+                <div class="d-none d-md-block">
+                    <div class="stat-divider"></div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item reveal reveal-delay-1">
+                        <div class="stat-number" data-target="96">0+</div>
+                        <div class="stat-label">Projects Submitted</div>
+                    </div>
+                </div>
+                <div class="d-none d-md-block">
+                    <div class="stat-divider"></div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item reveal reveal-delay-2">
+                        <div class="stat-number" data-target="3">0+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="d-none d-md-block">
+                    <div class="stat-divider"></div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item reveal reveal-delay-3">
+                        <div class="stat-number" data-target="7">0</div>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about">
+        <div class="container" style="max-width: 1280px;">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 reveal">
+                    <div class="about-image-wrapper">
+                        <img src="https://picsum.photos/seed/shuvomita-portrait/600/750.jpg" alt="Shuvomita Roy">
+                        <div class="about-image-overlay"></div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="reveal">
+                        <div class="section-label">About Me</div>
+                        <h2 class="section-title">A young developer<br>with big ambitions</h2>
+                    </div>
+                    <div class="reveal reveal-delay-1">
+                        <p class="section-desc" style="margin-bottom: 24px;">
+                            I'm Shuvomita Roy, a Class 9 student who fell in love with coding at an early age.
+                            Over the past 3+ years, I've completed 20+ client projects and submitted over 96+ projects
+                            total —
+                            from sleek landing pages to full frontend applications.
+                        </p>
+                        <p class="section-desc" style="margin-bottom: 32px;">
+                            I believe age is just a number when it comes to passion and dedication.
+                            I'm constantly learning, pushing boundaries, and expanding my skill set into
+                            Machine Learning and backend development with Python and C.
+                        </p>
+                    </div>
+                    <div class="reveal reveal-delay-2">
+                        <div class="about-info-item">
+                            <span class="about-info-label">Name</span>
+                            <span class="about-info-value">Shuvomita Roy</span>
+                        </div>
+                        <div class="about-info-item">
+                            <span class="about-info-label">Education</span>
+                            <span class="about-info-value">Class 9</span>
+                        </div>
+                        <div class="about-info-item">
+                            <span class="about-info-label">Role</span>
+                            <span class="about-info-value">Front End Developer</span>
+                        </div>
+                        <div class="about-info-item">
+                            <span class="about-info-label">Experience</span>
+                            <span class="about-info-value">3+ Years</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 reveal reveal-delay-3">
+                        <a href="#contact" class="btn-primary-custom">
+                            Download CV
+                            <i class="bi bi-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills">
+        <div class="container" style="max-width: 1280px;">
+            <div class="text-center mb-5">
+                <div class="section-label justify-content-center reveal">Skills & Tools</div>
+                <h2 class="section-title reveal reveal-delay-1">Technologies I Work With</h2>
+                <p class="section-desc mx-auto reveal reveal-delay-2">
+                    From frontend frameworks to machine learning — here's my complete toolkit.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6 reveal reveal-delay-1">
+                    <div class="skill-category">
+                        <div class="skill-category-title">
+                            <i class="bi bi-code-slash"></i> Frontend Development
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Bootstrap 5</span>
+                            <span class="skill-tag">Responsive Design</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal reveal-delay-2">
+                    <div class="skill-category">
+                        <div class="skill-category-title">
+                            <i class="bi bi-braces"></i> Programming Languages
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal reveal-delay-3">
+                    <div class="skill-category">
+                        <div class="skill-category-title">
+                            <i class="bi bi-robot"></i> AI & Machine Learning
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Python (ML Libraries)</span>
+                            <span class="skill-tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal reveal-delay-4">
+                    <div class="skill-category">
+                        <div class="skill-category-title">
+                            <i class="bi bi-tools"></i> Tools & Other
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Chrome DevTools</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" style="background: var(--bg-secondary);">
+        <div class="container" style="max-width: 1280px;">
+            <div class="text-center mb-5">
+                <div class="section-label justify-content-center reveal">Portfolio</div>
+                <h2 class="section-title reveal reveal-delay-1">Featured Projects</h2>
+                <p class="section-desc mx-auto reveal reveal-delay-2">
+                    A selection of my recent work — showcasing clean code, modern design, and great user experience.
+                </p>
+            </div>
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://picsum.photos/seed/ecommerce-shuvomita/800/500.jpg"
+                                alt="E-Commerce Platform">
+                            <div class="project-image-overlay"></div>
+                            <span class="project-number">01</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <h3 class="project-title">E-Commerce Platform</h3>
+                            <p class="project-desc">A fully responsive online store with product filtering, cart
+                                functionality, and clean checkout flow.</p>
+                            <a href="#" class="project-link">View Project <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://picsum.photos/seed/portfolio-shuvomita/800/500.jpg"
+                                alt="Portfolio Template">
+                            <div class="project-image-overlay"></div>
+                            <span class="project-number">02</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="project-tag">Bootstrap</span>
+                                <span class="project-tag">CSS</span>
+                            </div>
+                            <h3 class="project-title">Portfolio Template</h3>
+                            <p class="project-desc">A sleek dark-themed portfolio template with smooth animations and
+                                modern layout patterns.</p>
+                            <a href="#" class="project-link">View Project <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://picsum.photos/seed/dashboard-shuvomita/800/500.jpg" alt="Admin Dashboard">
+                            <div class="project-image-overlay"></div>
+                            <span class="project-number">03</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">Bootstrap</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <h3 class="project-title">Admin Dashboard</h3>
+                            <p class="project-desc">An analytics dashboard with charts, data tables, sidebar navigation,
+                                and responsive layout.</p>
+                            <a href="#" class="project-link">View Project <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://picsum.photos/seed/weather-shuvomita/800/500.jpg" alt="Weather App">
+                            <div class="project-image-overlay"></div>
+                            <span class="project-number">04</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="project-tag">JavaScript</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">CSS</span>
+                            </div>
+                            <h3 class="project-title">Weather Application</h3>
+                            <p class="project-desc">Real-time weather app with location search, forecast display, and
+                                dynamic backgrounds.</p>
+                            <a href="#" class="project-link">View Project <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://picsum.photos/seed/landing-shuvomita/800/500.jpg" alt="SaaS Landing">
+                            <div class="project-image-overlay"></div>
+                            <span class="project-number">05</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">Bootstrap</span>
+                            </div>
+                            <h3 class="project-title">SaaS Landing Page</h3>
+                            <p class="project-desc">A high-converting SaaS landing page with pricing tables,
+                                testimonials, and CTA sections.</p>
+                            <a href="#" class="project-link">View Project <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services">
+        <div class="container" style="max-width: 1280px;">
+            <div class="text-center mb-5">
+                <div class="section-label justify-content-center reveal">What I Do</div>
+                <h2 class="section-title reveal reveal-delay-1">Services I Offer</h2>
+                <p class="section-desc mx-auto reveal reveal-delay-2">
+                    From pixel-perfect designs to intelligent systems — I deliver quality across domains.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-layout-text-window-reverse"></i></div>
+                        <h3 class="service-title">Web Development</h3>
+                        <p class="service-desc">Building responsive, fast, and accessible websites using HTML, CSS,
+                            JavaScript, and Bootstrap.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-phone"></i></div>
+                        <h3 class="service-title">Responsive Design</h3>
+                        <p class="service-desc">Ensuring every project looks perfect on all devices — from mobile phones
+                            to large desktop screens.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-palette"></i></div>
+                        <h3 class="service-title">UI/UX Implementation</h3>
+                        <p class="service-desc">Translating design mockups from Figma into pixel-perfect, interactive
+                            frontend code.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-robot"></i></div>
+                        <h3 class="service-title">Machine Learning</h3>
+                        <p class="service-desc">Building and training ML models using Python — classification,
+                            regression, and data analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-code-square"></i></div>
+                        <h3 class="service-title">C Programming</h3>
+                        <p class="service-desc">Writing efficient C programs for algorithms, data structures, and
+                            problem-solving tasks.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-lightning-charge"></i></div>
+                        <h3 class="service-title">Performance Optimization</h3>
+                        <p class="service-desc">Optimizing website speed, clean code structure, and best practices for
+                            better user experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EXPERIENCE ========== -->
+    <section id="experience" style="background: var(--bg-secondary);">
+        <div class="container" style="max-width: 1280px;">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="section-label reveal">Journey</div>
+                    <h2 class="section-title reveal reveal-delay-1">My Experience</h2>
+                    <p class="section-desc reveal reveal-delay-2">
+                        3+ years of hands-on development experience — starting young and growing fast.
+                    </p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-date">2024 — Present</div>
+                        <div class="timeline-title">Front End Developer</div>
+                        <div class="timeline-company">Freelance</div>
+                        <div class="timeline-desc">Building responsive websites and web apps for international clients.
+                            Specializing in modern CSS, JavaScript, and Bootstrap-based projects.</div>
+                    </div>
+                    <div class="timeline-item reveal reveal-delay-1">
+                        <div class="timeline-date">2023 — 2024</div>
+                        <div class="timeline-title">ML Enthusiast & Python Developer</div>
+                        <div class="timeline-company">Self-Learning Projects</div>
+                        <div class="timeline-desc">Dove into Machine Learning with Python. Built classification models,
+                            explored data analysis, and integrated ML into web interfaces.</div>
+                    </div>
+                    <div class="timeline-item reveal reveal-delay-2">
+                        <div class="timeline-date">2022 — 2023</div>
+                        <div class="timeline-title">Junior Web Developer</div>
+                        <div class="timeline-company">Freelance & Personal Projects</div>
+                        <div class="timeline-desc">Started my journey with HTML & CSS. Built landing pages, portfolios,
+                            and small business websites. Completed 30+ personal projects.</div>
+                    </div>
+                    <div class="timeline-item reveal reveal-delay-3">
+                        <div class="timeline-date">2021 — 2022</div>
+                        <div class="timeline-title">Coding Beginner</div>
+                        <div class="timeline-company">Self-Taught</div>
+                        <div class="timeline-desc">Wrote my first lines of code. Learned HTML, CSS basics, and C
+                            programming. Built simple static pages and console applications.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section id="testimonials">
+        <div class="container" style="max-width: 1280px;">
+            <div class="text-center mb-5">
+                <div class="section-label justify-content-center reveal">Testimonials</div>
+                <h2 class="section-title reveal reveal-delay-1">What Clients Say</h2>
+                <p class="section-desc mx-auto reveal reveal-delay-2">
+                    Don't just take my word for it — hear from people I've worked with.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">"Shuvomita delivered an amazing website for my business. The design
+                            was clean, modern, and exactly what I wanted. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/client1-shuvo/80/80.jpg" alt="Client"
+                                class="testimonial-avatar">
+                            <div>
+                                <div class="testimonial-name">Sarah Mitchell</div>
+                                <div class="testimonial-role">Business Owner, USA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">"Incredible talent for someone so young! The responsive design was
+                            flawless and the code was super clean. Will definitely hire again."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/client2-shuvo/80/80.jpg" alt="Client"
+                                class="testimonial-avatar">
+                            <div>
+                                <div class="testimonial-name">Rahul Sharma</div>
+                                <div class="testimonial-role">Startup Founder, India</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="testimonial-text">"Fast delivery, great communication, and pixel-perfect results.
+                            Shuvomita understood my requirements perfectly from the first call."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/client3-shuvo/80/80.jpg" alt="Client"
+                                class="testimonial-avatar">
+                            <div>
+                                <div class="testimonial-name">Emily Chen</div>
+                                <div class="testimonial-role">Designer, Canada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact">
+        <div class="container" style="max-width: 1280px;">
+            <div class="text-center mb-5">
+                <div class="section-label justify-content-center reveal">Get In Touch</div>
+                <h2 class="section-title reveal reveal-delay-1">Let's Work Together</h2>
+                <p class="section-desc mx-auto reveal reveal-delay-2">
+                    Have a project in mind? I'd love to hear about it. Drop me a message and let's create something
+                    amazing.
+                </p>
+            </div>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                        <div>
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value"><a href="mailto:shuvomita@example.com">royshuvomita895@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
+                        <div>
+                            <div class="contact-label">Location</div>
+                            <div class="contact-value">Bangladesh</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="bi bi-github"></i></div>
+                        <div>
+                            <div class="contact-label">GitHub</div>
+                            <div class="contact-value"><a href="#">Shuvomita895</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal reveal-delay-4">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+                        <div>
+                            <div class="contact-label">LinkedIn</div>
+                            <div class="contact-value"><a href="#">Shuvomita Roy</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="contactForm" class="reveal">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Your Name</label>
+                                <input type="text" class="form-control-custom" placeholder="John Doe" required
+                                    id="nameInput">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Your Email</label>
+                                <input type="email" class="form-control-custom" placeholder="john@example.com" required
+                                    id="emailInput">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-custom">Subject</label>
+                                <input type="text" class="form-control-custom" placeholder="Project Inquiry"
+                                    id="subjectInput">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-custom">Message</label>
+                                <textarea class="form-control-custom" placeholder="Tell me about your project..."
+                                    required id="messageInput"></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn-primary-custom" style="border:none; cursor:pointer;">
+                                    Send Message
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container" style="max-width: 1280px;">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-4">
+                    <a class="navbar-brand d-inline-block mb-2" href="#hero" style="font-size: 24px;">Shuvomita<span
+                            style="color:var(--accent);">.</span></a>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;">
+                        Front End Developer crafting beautiful digital experiences from Bangladesh.
+                    </p>
+                    <div class="footer-social d-flex gap-2">
+                        <a href="#"><i class="bi bi-github"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6
+                        style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--text-secondary);">
+                        Navigation</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="#about" class="footer-link">About</a>
+                        <a href="#skills" class="footer-link">Skills</a>
+                        <a href="#projects" class="footer-link">Projects</a>
+                        <a href="#contact" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6
+                        style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--text-secondary);">
+                        Services</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="#services" class="footer-link">Web Dev</a>
+                        <a href="#services" class="footer-link">UI/UX</a>
+                        <a href="#services" class="footer-link">ML Projects</a>
+                        <a href="#services" class="footer-link">Responsive</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h6
+                        style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--text-secondary);">
+                        Quick Stats</h6>
+                    <div class="d-flex gap-4">
+                        <div>
+                            <div style="font-size: 24px; font-weight: 600; color: var(--accent);">20+</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Clients</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 24px; font-weight: 600; color: var(--accent);">96+</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Projects</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 24px; font-weight: 600; color: var(--accent);">3+</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Years</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">
+                    © 2025 Shuvomita Roy. All rights reserved.
+                </p>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">
+                    Built with <span style="color: var(--accent);">♥</span> using HTML, CSS, JS & Bootstrap
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== TOAST ========== -->
+    <div class="toast-custom" id="toast">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="toastMessage">Message sent successfully!</span>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ========== NAVBAR SCROLL ==========
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ========== CLOSE MOBILE NAV ON CLICK ==========
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navCollapse = document.getElementById('navMenu');
+                const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // ========== REVEAL ON SCROLL ==========
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ========== COUNTER ANIMATION ==========
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let counterStarted = false;
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterStarted) {
+                    counterStarted = true;
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        const suffix = stat.textContent.replace('0', '');
+                        let count = 0;
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+
+                        const updateCount = () => {
+                            count += step;
+                            if (count < target) {
+                                stat.textContent = Math.floor(count) + suffix;
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                stat.textContent = target + suffix;
+                            }
+                        };
+                        updateCount();
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(el => counterObserver.observe(el));
+
+        // ========== CONTACT FORM ==========
+        const contactForm = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('nameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const message = document.getElementById('messageInput').value.trim();
+
+            if (!name || !email || !message) {
+                showToast('Please fill in all required fields.', 'bi-exclamation-triangle-fill');
+                return;
+            }
+
+            // Simulate sending
+            const btn = contactForm.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                showToast(`Thanks ${name}! Your message has been sent.`, 'bi-check-circle-fill');
+                contactForm.reset();
+                btn.innerHTML = 'Send Message <i class="bi bi-send"></i>';
+                btn.disabled = false;
+            }, 1500);
+        });
+
+        function showToast(message, icon) {
+            toastMessage.textContent = message;
+            toast.querySelector('i').className = 'bi ' + icon;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ========== SMOOTH SCROLL (fallback) ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========== TYPING EFFECT FOR HERO (subtle) ==========
+        const roles = ['Front End Developer', 'Python Enthusiast', 'ML Explorer', 'C Programmer'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.createElement('span');
+        typingElement.style.cssText = 'color: var(--accent); border-right: 2px solid var(--accent); padding-right: 4px;';
+
+        // Insert after subtitle
+        const subtitle = document.querySelector('.hero-subtitle');
+        const roleContainer = document.createElement('div');
+        roleContainer.style.cssText = 'font-size: 16px; font-weight: 500; margin-bottom: 36px; min-height: 28px;';
+        roleContainer.appendChild(typingElement);
+        subtitle.parentNode.insertBefore(roleContainer, subtitle.nextSibling);
+
+        // Adjust spacing
+        subtitle.style.marginBottom = '12px';
+
+        function typeRole() {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+
+            typingElement.textContent = currentRole.substring(0, charIndex);
+
+            let speed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                speed = 400;
+            }
+
+            setTimeout(typeRole, speed);
+        }
+
+        // Start typing after hero animation
+        setTimeout(typeRole, 1200);
+    </script>
+</body>
+
+</html>
