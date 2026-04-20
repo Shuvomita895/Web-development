@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamline — Work Smarter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #07080b;
+            --bg2: #0d0f14;
+            --card: #12141c;
+            --border: #1c1f2b;
+            --border2: #272b3a;
+            --fg: #e6e2da;
+            --fg2: #a9a49a;
+            --muted: #5e5a52;
+            --accent: #d4943a;
+            --accent2: #eaad50;
+            --accent-soft: rgba(212, 148, 58, 0.1);
+            --green: #38c67a;
+            --green-soft: rgba(56, 198, 122, 0.1);
+            --red: #e85454;
+            --blue: #3b8beb;
+            --purple: #9b7ce8;
+            --radius: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            margin: 0;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        a:hover {
+            color: var(--accent2);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* Bootstrap overrides */
+        .container {
+            max-width: 1120px;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+
+        .nav-link {
+            color: var(--fg2) !important;
+            font-size: .87rem;
+            font-weight: 500;
+            padding: 8px 0 !important;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width .25s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--fg) !important;
+        }
+
+        .form-control {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: .88rem;
+        }
+
+        .form-control:focus {
+            background: var(--bg2);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+            color: var(--fg);
+        }
+
+        .form-control::placeholder {
+            color: var(--muted);
+        }
+
+        /* Navbar */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(7, 8, 11, .8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: all .3s;
+        }
+
+        .site-nav.scrolled {
+            background: rgba(7, 8, 11, .95);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .3);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--fg);
+            letter-spacing: .03em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Buttons */
+        .btn-accent {
+            padding: 12px 28px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: .88rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .25s;
+        }
+
+        .btn-accent:hover {
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(212, 148, 58, .3);
+        }
+
+        .btn-ghost {
+            padding: 12px 28px;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--fg);
+            font-weight: 600;
+            font-size: .88rem;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .25s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--border2);
+            color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm-accent {
+            padding: 9px 20px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: .82rem;
+            transition: all .25s;
+        }
+
+        .btn-sm-accent:hover {
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(212, 148, 58, .3);
+        }
+
+        /* Ambient */
+        .ambient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(212, 148, 58, .04), transparent), radial-gradient(ellipse 500px 500px at 80% 70%, rgba(56, 198, 122, .02), transparent);
+        }
+
+        .z1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, .012) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .012) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse 55% 55% at 45% 50%, black, transparent);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: var(--accent-soft);
+            font-size: .76rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: .04em;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .3;
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            color: var(--fg2);
+            font-size: 1.05rem;
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-mockup {
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, .4);
+            background: var(--card);
+        }
+
+        .hero-mockup img {
+            width: 100%;
+            display: block;
+        }
+
+        .hero-float {
+            position: absolute;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: rgba(18, 20, 28, .92);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            font-size: .8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: floaty 5s ease-in-out infinite;
+        }
+
+        @keyframes floaty {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .hero-float i {
+            margin-right: 6px;
+        }
+
+        /* Trusted by */
+        .trusted {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trusted-label {
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .trusted-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .trusted-logos span {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--muted);
+            opacity: .5;
+            letter-spacing: .02em;
+            transition: opacity .3s;
+        }
+
+        .trusted-logos span:hover {
+            opacity: .8;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .label {
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .heading {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            margin-bottom: 14px;
+            line-height: 1.15;
+        }
+
+        .sub {
+            color: var(--fg2);
+            max-width: 520px;
+            line-height: 1.8;
+        }
+
+        /* Feature cards */
+        .feat-card {
+            padding: 28px;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all .3s;
+            height: 100%;
+        }
+
+        .feat-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-4px);
+        }
+
+        .feat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .feat-icon.amber {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .feat-icon.green {
+            background: var(--green-soft);
+            color: var(--green);
+        }
+
+        .feat-icon.blue {
+            background: rgba(59, 139, 235, .1);
+            color: var(--blue);
+        }
+
+        .feat-icon.purple {
+            background: rgba(155, 124, 232, .1);
+            color: var(--purple);
+        }
+
+        .feat-card h4 {
+            font-size: 1.02rem;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .feat-card p {
+            font-size: .86rem;
+            color: var(--fg2);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Screenshot */
+        .screenshot-wrap {
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+            background: var(--card);
+        }
+
+        .screenshot-wrap img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Pricing */
+        .price-card {
+            padding: 32px;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all .3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-4px);
+        }
+
+        .price-card.featured {
+            border-color: var(--accent);
+            position: relative;
+        }
+
+        .price-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 14px;
+            border-radius: 50px;
+            background: var(--accent);
+            color: #fff;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .price-name {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--fg2);
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .price-amount span {
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .price-desc {
+            font-size: .82rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .price-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 28px;
+            flex: 1;
+        }
+
+        .price-features li {
+            font-size: .85rem;
+            color: var(--fg2);
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+
+        .price-features li i {
+            color: var(--green);
+            font-size: .75rem;
+            width: 16px;
+            text-align: center;
+        }
+
+        .price-features li.disabled {
+            color: var(--muted);
+            text-decoration: line-through;
+        }
+
+        .price-features li.disabled i {
+            color: var(--muted);
+        }
+
+        /* Testimonial */
+        .testi-card {
+            padding: 28px;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid var(--border);
+            height: 100%;
+            transition: all .3s;
+        }
+
+        .testi-card:hover {
+            border-color: var(--border2);
+        }
+
+        .testi-stars {
+            color: var(--accent);
+            font-size: .78rem;
+            margin-bottom: 14px;
+        }
+
+        .testi-text {
+            font-size: .92rem;
+            color: var(--fg2);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+
+        .testi-name {
+            font-weight: 700;
+            font-size: .88rem;
+        }
+
+        .testi-role {
+            font-size: .76rem;
+            color: var(--muted);
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-soft), transparent 60%);
+            animation: ctaPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+
+            0%,
+            100% {
+                opacity: .5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 10px;
+            max-width: 440px;
+            margin: 24px auto 0;
+            position: relative;
+        }
+
+        .cta-form .form-control {
+            flex: 1;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: border-color .2s;
+        }
+
+        .faq-item.open {
+            border-color: var(--border2);
+        }
+
+        .faq-q {
+            padding: 16px 20px;
+            background: var(--card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-weight: 600;
+            font-size: .9rem;
+            transition: background .2s;
+            user-select: none;
+        }
+
+        .faq-q:hover {
+            background: var(--bg2);
+        }
+
+        .faq-q i {
+            color: var(--muted);
+            font-size: .75rem;
+            transition: transform .25s;
+        }
+
+        .faq-item.open .faq-q i {
+            transform: rotate(180deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease, padding .3s;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding: 0 20px 16px;
+        }
+
+        .faq-a p {
+            font-size: .86rem;
+            color: var(--fg2);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+        }
+
+        .footer-heading {
+            font-family: 'Inter', sans-serif;
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--fg);
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            display: block;
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 10px;
+            transition: color .2s;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            font-size: .88rem;
+        }
+
+        .social-icon:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s, transform .6s;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width:991px) {
+            .hero-visual {
+                display: none;
+            }
+        }
+
+        @media(max-width:767px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+
+            .trusted-logos {
+                gap: 24px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient"></div>
+    <div class="z1">
+
+        <!-- Navbar -->
+        <nav class="site-nav" id="siteNav">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between" style="height:64px;">
+                    <a href="#" class="logo">STREAM<span>LINE</span></a>
+                    <div class="d-none d-md-flex align-items-center gap-4">
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#how" class="nav-link">How It Works</a>
+                        <a href="#pricing" class="nav-link">Pricing</a>
+                        <a href="#faq" class="nav-link">FAQ</a>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="#" class="btn btn-ghost d-none d-sm-inline-flex"
+                            style="padding:9px 20px;font-size:.84rem;">Log In</a>
+                        <a href="#" class="btn btn-sm-accent">Start Free Trial</a>
+                        <button class="d-md-none"
+                            style="background:none;border:1px solid var(--border);border-radius:8px;width:38px;height:38px;color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;"
+                            onclick="document.getElementById('mobileMenu').classList.toggle('d-none')"
+                            aria-label="Menu"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+                <div id="mobileMenu" class="d-none d-md-none pb-3">
+                    <a href="#features" class="nav-link d-block">Features</a>
+                    <a href="#how" class="nav-link d-block">How It Works</a>
+                    <a href="#pricing" class="nav-link d-block">Pricing</a>
+                    <a href="#faq" class="nav-link d-block">FAQ</a>
+                    <a href="#" class="nav-link d-block">Log In</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero" id="hero">
+            <div class="hero-grid"></div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="hero-badge"><span class="dot"></span> Now in public beta</div>
+                        <h1 class="hero-title">Manage projects <em>without</em> the chaos</h1>
+                        <p class="hero-sub">Streamline brings your tasks, docs, and team communication into one focused
+                            workspace. Less switching, more shipping.</p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="#pricing" class="btn btn-accent">Get Started Free <i class="fas fa-arrow-right"
+                                    style="font-size:.75rem;"></i></a>
+                            <a href="#how" class="btn btn-ghost"><i class="fas fa-play" style="font-size:.7rem;"></i>
+                                Watch Demo</a>
+                        </div>
+                        <div class="d-flex align-items-center gap-4 mt-4" style="font-size:.82rem;color:var(--muted);">
+                            <span><i class="fas fa-check"
+                                    style="color:var(--green);margin-right:4px;font-size:.7rem;"></i> Free 14-day
+                                trial</span>
+                            <span><i class="fas fa-check"
+                                    style="color:var(--green);margin-right:4px;font-size:.7rem;"></i> No credit
+                                card</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="hero-visual">
+                            <div class="hero-mockup">
+                                <img src="https://picsum.photos/seed/saas-dash/720/480.jpg" alt="Dashboard preview">
+                            </div>
+                            <div class="hero-float" style="top:16px;right:-20px;">
+                                <i class="fas fa-check-circle" style="color:var(--green);"></i> Task completed
+                            </div>
+                            <div class="hero-float" style="bottom:50px;left:-40px;animation-delay:-2s;">
+                                <i class="fas fa-users" style="color:var(--blue);"></i> 3 members online
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trusted -->
+        <div class="trusted">
+            <div class="container">
+                <div class="trusted-label">Trusted by teams at</div>
+                <div class="trusted-logos">
+                    <span>ACME Corp</span>
+                    <span>Globex</span>
+                    <span>Initech</span>
+                    <span>Umbrella</span>
+                    <span>Stark Ltd</span>
+                    <span>Wayne Ent.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <section id="features">
+            <div class="container">
+                <div class="text-center reveal">
+                    <p class="label">Features</p>
+                    <h2 class="heading">Everything your team needs</h2>
+                    <p class="sub" style="margin:0 auto;">Replace your scattered tools with one platform that actually
+                        fits how your team works.</p>
+                </div>
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6 col-lg-4 reveal">
+                        <div class="feat-card">
+                            <div class="feat-icon amber"><i class="fas fa-list-check"></i></div>
+                            <h4>Task Management</h4>
+                            <p>Create, assign, and track tasks with boards, lists, and timelines. Know exactly where
+                                every project stands.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.08s;">
+                        <div class="feat-card">
+                            <div class="feat-icon green"><i class="fas fa-file-lines"></i></div>
+                            <h4>Built-in Docs</h4>
+                            <p>Write specs, meeting notes, and wikis right next to your work. No more context switching
+                                between apps.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.16s;">
+                        <div class="feat-card">
+                            <div class="feat-icon blue"><i class="fas fa-comments"></i></div>
+                            <h4>Team Chat</h4>
+                            <p>Discussions tied to tasks and projects. Keep conversations where the context is, not
+                                buried in a separate channel.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 reveal">
+                        <div class="feat-card">
+                            <div class="feat-icon purple"><i class="fas fa-chart-bar"></i></div>
+                            <h4>Reporting</h4>
+                            <p>Real-time dashboards showing workload, velocity, and bottlenecks. Make decisions with
+                                data, not guesses.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.08s;">
+                        <div class="feat-card">
+                            <div class="feat-icon amber"><i class="fas fa-plug"></i></div>
+                            <h4>Integrations</h4>
+                            <p>Connect with GitHub, Slack, Figma, Google Drive, and 50+ other tools your team already
+                                uses.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.16s;">
+                        <div class="feat-card">
+                            <div class="feat-icon green"><i class="fas fa-shield-halved"></i></div>
+                            <h4>Security</h4>
+                            <p>SOC 2 compliant, end-to-end encryption, SSO, and role-based access. Your data stays safe.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshot -->
+        <section id="how" style="background:var(--bg2);">
+            <div class="container">
+                <div class="text-center reveal">
+                    <p class="label">How It Works</p>
+                    <h2 class="heading">See it in action</h2>
+                    <p class="sub" style="margin:0 auto;">Three steps to get your team organized and shipping faster.
+                    </p>
+                </div>
+                <div class="row g-4 mt-4 align-items-center">
+                    <div class="col-lg-4 reveal">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                            <div
+                                style="width:36px;height:36px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;">
+                                1</div>
+                            <h4 style="font-size:1rem;margin:0;font-family:'Inter',sans-serif;">Create your workspace
+                            </h4>
+                        </div>
+                        <p style="font-size:.88rem;color:var(--fg2);line-height:1.7;">Sign up in 30 seconds. Invite your
+                            team with a link. No setup wizards, no config files.</p>
+                    </div>
+                    <div class="col-lg-4 reveal" style="transition-delay:.1s;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                            <div
+                                style="width:36px;height:36px;border-radius:8px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;">
+                                2</div>
+                            <h4 style="font-size:1rem;margin:0;font-family:'Inter',sans-serif;">Import or start fresh
+                            </h4>
+                        </div>
+                        <p style="font-size:.88rem;color:var(--fg2);line-height:1.7;">Bring existing tasks from Trello,
+                            Jira, or Asana. Or start with a clean slate and build your workflow.</p>
+                    </div>
+                    <div class="col-lg-4 reveal" style="transition-delay:.2s;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                            <div
+                                style="width:36px;height:36px;border-radius:8px;background:rgba(59,139,235,.1);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;">
+                                3</div>
+                            <h4 style="font-size:1rem;margin:0;font-family:'Inter',sans-serif;">Ship with clarity</h4>
+                        </div>
+                        <p style="font-size:.88rem;color:var(--fg2);line-height:1.7;">Everyone knows what to do, where
+                            things stand, and what's next. Less noise, more progress.</p>
+                    </div>
+                </div>
+                <div class="mt-5 reveal">
+                    <div class="screenshot-wrap">
+                        <img src="https://picsum.photos/seed/saas-full/1100/520.jpg" alt="App screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing">
+            <div class="container">
+                <div class="text-center reveal">
+                    <p class="label">Pricing</p>
+                    <h2 class="heading">Simple, transparent pricing</h2>
+                    <p class="sub" style="margin:0 auto;">No hidden fees. No per-seat charges that spiral out of
+                        control. Pick a plan and start.</p>
+                </div>
+                <div class="row g-4 mt-4 justify-content-center">
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="price-card">
+                            <div class="price-name">Starter</div>
+                            <div class="price-amount">$0 <span>/ month</span></div>
+                            <div class="price-desc">For individuals and small side projects.</div>
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> Up to 5 team members</li>
+                                <li><i class="fas fa-check"></i> 10 projects</li>
+                                <li><i class="fas fa-check"></i> Basic task boards</li>
+                                <li><i class="fas fa-check"></i> 1 GB storage</li>
+                                <li class="disabled"><i class="fas fa-xmark"></i> Advanced reporting</li>
+                                <li class="disabled"><i class="fas fa-xmark"></i> Custom integrations</li>
+                            </ul>
+                            <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Get Started</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.1s;">
+                        <div class="price-card featured">
+                            <div class="price-name">Pro</div>
+                            <div class="price-amount">$19 <span>/ month</span></div>
+                            <div class="price-desc">For growing teams that need more power.</div>
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> Unlimited members</li>
+                                <li><i class="fas fa-check"></i> Unlimited projects</li>
+                                <li><i class="fas fa-check"></i> Boards, lists, timelines</li>
+                                <li><i class="fas fa-check"></i> 50 GB storage</li>
+                                <li><i class="fas fa-check"></i> Advanced reporting</li>
+                                <li><i class="fas fa-check"></i> All integrations</li>
+                            </ul>
+                            <a href="#" class="btn btn-accent" style="width:100%;justify-content:center;">Start Free
+                                Trial</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.2s;">
+                        <div class="price-card">
+                            <div class="price-name">Enterprise</div>
+                            <div class="price-amount">$49 <span>/ month</span></div>
+                            <div class="price-desc">For organizations that need control and scale.</div>
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> Everything in Pro</li>
+                                <li><i class="fas fa-check"></i> SSO / SAML</li>
+                                <li><i class="fas fa-check"></i> Audit logs</li>
+                                <li><i class="fas fa-check"></i> 500 GB storage</li>
+                                <li><i class="fas fa-check"></i> Priority support</li>
+                                <li><i class="fas fa-check"></i> Custom SLA</li>
+                            </ul>
+                            <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact
+                                Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section style="background:var(--bg2);">
+            <div class="container">
+                <div class="text-center reveal">
+                    <p class="label">Testimonials</p>
+                    <h2 class="heading">Loved by real teams</h2>
+                </div>
+                <div class="row g-4 mt-4">
+                    <div class="col-md-4 reveal">
+                        <div class="testi-card">
+                            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testi-text">"We moved from three separate tools to Streamline. The reduction in
+                                context switching alone saved us hours every week."</p>
+                            <div class="testi-author">
+                                <img src="https://picsum.photos/seed/testi-a/100/100.jpg" alt="Avatar"
+                                    class="testi-avatar">
+                                <div>
+                                    <div class="testi-name">Maya Patel</div>
+                                    <div class="testi-role">Engineering Lead, Acme Corp</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal" style="transition-delay:.1s;">
+                        <div class="testi-card">
+                            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testi-text">"The docs feature is underrated. Having specs right next to tasks
+                                means no one has to go hunting for context in Slack threads."</p>
+                            <div class="testi-author">
+                                <img src="https://picsum.photos/seed/testi-b/100/100.jpg" alt="Avatar"
+                                    class="testi-avatar">
+                                <div>
+                                    <div class="testi-name">Jake Morrison</div>
+                                    <div class="testi-role">Product Manager, Globex</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal" style="transition-delay:.2s;">
+                        <div class="testi-card">
+                            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star-half-alt"></i></div>
+                            <p class="testi-text">"Clean, fast, and it doesn't try to do everything. That's exactly why
+                                it works. Our team adopted it in under a day."</p>
+                            <div class="testi-author">
+                                <img src="https://picsum.photos/seed/testi-c/100/100.jpg" alt="Avatar"
+                                    class="testi-avatar">
+                                <div>
+                                    <div class="testi-name">Lena Zhang</div>
+                                    <div class="testi-role">CTO, Initech</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-5 reveal">
+                        <p class="label">FAQ</p>
+                        <h2 class="heading">Common questions</h2>
+                        <p class="sub">Can't find what you're looking for? Reach out to our support team and we'll get
+                            back to you within a few hours.</p>
+                    </div>
+                    <div class="col-lg-7 reveal" style="transition-delay:.1s;">
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-q">Is there really a free plan?<i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-a">
+                                <p>Yes. The Starter plan is free forever with up to 5 members and 10 projects. No credit
+                                    card required to sign up.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-q">Can I import from other tools?<i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-a">
+                                <p>Absolutely. We support direct import from Trello, Jira, Asana, Monday.com, and
+                                    Notion. Most imports complete in under a minute.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-q">What happens when my trial ends?<i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-a">
+                                <p>You'll be moved to the free Starter plan automatically. No charges, no data loss. You
+                                    can upgrade anytime to keep your Pro features.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-q">Is my data secure?<i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-a">
+                                <p>We're SOC 2 Type II certified, use AES-256 encryption at rest, and TLS 1.3 in
+                                    transit. Enterprise plans also get SSO, audit logs, and custom data residency
+                                    options.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-q">Can I cancel anytime?<i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-a">
+                                <p>Yes. Cancel from your billing page with one click. You'll keep access until the end
+                                    of your current billing period. No cancellation fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding:80px 0;">
+            <div class="container">
+                <div class="cta-section reveal">
+                    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:8px;position:relative;">Ready to
+                        streamline your workflow?</h2>
+                    <p style="color:var(--fg2);max-width:440px;margin:0 auto;position:relative;">Join thousands of teams
+                        shipping better, faster. Start your free trial today.</p>
+                    <form class="cta-form"
+                        onsubmit="event.preventDefault();alert('Thanks! Check your email to get started.');this.reset();">
+                        <input type="email" class="form-control" placeholder="Enter your work email" required>
+                        <button type="submit" class="btn btn-accent">Start Free</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-4">
+                        <a href="#" class="logo" style="display:block;margin-bottom:14px;">STREAM<span>LINE</span></a>
+                        <p style="font-size:.86rem;color:var(--muted);max-width:280px;line-height:1.7;">Project
+                            management that stays out of your way so you can focus on the work that matters.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <div class="footer-heading">Product</div>
+                        <a href="#features" class="footer-link">Features</a>
+                        <a href="#pricing" class="footer-link">Pricing</a>
+                        <a href="#" class="footer-link">Integrations</a>
+                        <a href="#" class="footer-link">Changelog</a>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <div class="footer-heading">Company</div>
+                        <a href="#" class="footer-link">About</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <div class="footer-heading">Resources</div>
+                        <a href="#" class="footer-link">Documentation</a>
+                        <a href="#" class="footer-link">API Reference</a>
+                        <a href="#" class="footer-link">Guides</a>
+                        <a href="#" class="footer-link">Community</a>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <div class="footer-heading">Legal</div>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Cookie Policy</a>
+                        <a href="#" class="footer-link">Security</a>
+                    </div>
+                </div>
+                <div
+                    style="border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                    <span style="font-size:.8rem;color:var(--muted);">&copy; 2025 Streamline. All rights
+                        reserved.</span>
+                    <span style="font-size:.8rem;color:var(--muted);">Built with Bootstrap 5</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll: navbar style
+        window.addEventListener('scroll', () => {
+            document.getElementById('siteNav').classList.toggle('scrolled', scrollY > 50);
+        });
+
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+                // Close mobile menu if open
+                document.getElementById('mobileMenu').classList.add('d-none');
+            });
+        });
+
+        // FAQ toggle
+        function toggleFaq(item) {
+            const wasOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+            if (!wasOpen) item.classList.add('open');
+        }
+    </script>
+</body>
+
+</html>

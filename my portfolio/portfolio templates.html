@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Template</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #090909;
+            --card: #131313;
+            --border: #1e1e1e;
+            --fg: #e4e0d8;
+            --muted: #706b63;
+            --accent: #c8553d;
+            --accent2: #3aa88c;
+            --radius: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--fg);
+        }
+
+        /* Bootstrap overrides */
+        .container {
+            max-width: 960px;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-toggler {
+            border: none;
+            box-shadow: none !important;
+        }
+
+        .nav-link {
+            color: var(--muted) !important;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 6px 0 !important;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--fg) !important;
+        }
+
+        .form-control {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            background: var(--bg);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(200, 85, 61, 0.15);
+            color: var(--fg);
+        }
+
+        .form-control::placeholder {
+            color: var(--muted);
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        /* Navbar */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(9, 9, 9, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--fg);
+            letter-spacing: 0.04em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .heading {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .sub {
+            color: var(--muted);
+            max-width: 480px;
+        }
+
+        /* Hero */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-name {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        .hero-name em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 460px;
+            margin-bottom: 32px;
+        }
+
+        .btn-main {
+            padding: 13px 30px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-main:hover {
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(200, 85, 61, 0.3);
+        }
+
+        .btn-ghost {
+            padding: 13px 30px;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--fg);
+            font-weight: 600;
+            font-size: 0.88rem;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--muted);
+            color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        /* Project cards */
+        .proj-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+            transition: all 0.3s;
+        }
+
+        .proj-card:hover {
+            border-color: #2a2a2a;
+            transform: translateY(-4px);
+        }
+
+        .proj-img {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: #0e0e0e;
+        }
+
+        .proj-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .proj-card:hover .proj-img img {
+            transform: scale(1.04);
+        }
+
+        .proj-body {
+            padding: 18px;
+        }
+
+        .proj-type {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent2);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .proj-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .proj-desc {
+            font-size: 0.84rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .proj-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .proj-tags span {
+            padding: 3px 9px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        /* Skill tags */
+        .skill-tag {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        /* Experience */
+        .exp-item {
+            padding: 24px;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .exp-item:hover {
+            border-color: #2a2a2a;
+        }
+
+        .exp-date {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .exp-role {
+            font-size: 1.05rem;
+            margin: 4px 0 2px;
+        }
+
+        .exp-co {
+            font-size: 0.88rem;
+            color: var(--accent2);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .exp-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Contact info */
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .info-row i {
+            color: var(--accent);
+            width: 18px;
+            text-align: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            transition: all 0.3s;
+            margin-right: 6px;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer span {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 767px) {
+            section {
+                padding: 70px 0;
+            }
+
+            .hero-name {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav -->
+    <nav class="site-nav">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between" style="height:64px;">
+                <a href="#" class="logo">YOUR<span>.</span>NAME</a>
+                <div class="d-none d-md-flex gap-4">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="navbar-toggler d-md-none" onclick="this.nextElementSibling.classList.toggle('d-none')"
+                    aria-label="Menu">
+                    <i class="fas fa-bars" style="color:var(--fg);font-size:1.1rem;"></i>
+                </button>
+                <div class="d-none d-md-none flex-column gap-2 pb-3">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="container">
+            <p class="label">Hello, I'm</p>
+            <h1 class="hero-name">Your <em>Name</em></h1>
+            <p class="hero-sub">A short tagline about what you do. Keep it to one or two sentences that quickly tell
+                people who you are.</p>
+            <div class="d-flex gap-3 flex-wrap">
+                <a href="#projects" class="btn-main">See My Work <i class="fas fa-arrow-right"
+                        style="font-size:0.75rem;"></i></a>
+                <a href="#contact" class="btn-ghost">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="divider"></div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-md-4 reveal">
+                    <img src="https://picsum.photos/seed/portrait-photo/400/480.jpg" alt="Portrait"
+                        style="width:100%;border-radius:var(--radius);border:1px solid var(--border);object-fit:cover;height:380px;">
+                </div>
+                <div class="col-md-8 reveal" style="transition-delay:0.1s;">
+                    <p class="label">About</p>
+                    <h2 class="heading">A bit about yourself</h2>
+                    <p class="sub mb-3">Write a short bio here. Mention your background, what you specialize in, and
+                        what drives you. Two or three paragraphs is plenty for a portfolio.</p>
+                    <p class="sub mb-4">You can add details like your location, education, or interests to give visitors
+                        a sense of who you are beyond just your work.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="skill-tag">Skill One</span>
+                        <span class="skill-tag">Skill Two</span>
+                        <span class="skill-tag">Skill Three</span>
+                        <span class="skill-tag">Skill Four</span>
+                        <span class="skill-tag">Skill Five</span>
+                        <span class="skill-tag">Skill Six</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="divider"></div>
+    </div>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="container">
+            <div class="reveal">
+                <p class="label">Projects</p>
+                <h2 class="heading">Selected work</h2>
+                <p class="sub mb-4">Replace these with your actual projects. Each card should show what you built, your
+                    role, and the tech used.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 reveal">
+                    <div class="proj-card">
+                        <div class="proj-img"><img src="https://picsum.photos/seed/project-alpha/600/380.jpg"
+                                alt="Project"></div>
+                        <div class="proj-body">
+                            <div class="proj-type">Web App</div>
+                            <div class="proj-name">Project Title One</div>
+                            <div class="proj-desc">Brief description of what this project does and what your
+                                contribution was.</div>
+                            <div class="proj-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal" style="transition-delay:0.1s;">
+                    <div class="proj-card">
+                        <div class="proj-img"><img src="https://picsum.photos/seed/project-beta/600/380.jpg"
+                                alt="Project"></div>
+                        <div class="proj-body">
+                            <div class="proj-type">Design</div>
+                            <div class="proj-name">Project Title Two</div>
+                            <div class="proj-desc">Brief description of what this project does and what your
+                                contribution was.</div>
+                            <div class="proj-tags"><span>Figma</span><span>UI/UX</span><span>Prototyping</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal">
+                    <div class="proj-card">
+                        <div class="proj-img"><img src="https://picsum.photos/seed/project-gamma/600/380.jpg"
+                                alt="Project"></div>
+                        <div class="proj-body">
+                            <div class="proj-type">Full Stack</div>
+                            <div class="proj-name">Project Title Three</div>
+                            <div class="proj-desc">Brief description of what this project does and what your
+                                contribution was.</div>
+                            <div class="proj-tags"><span>Next.js</span><span>PostgreSQL</span><span>Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal" style="transition-delay:0.1s;">
+                    <div class="proj-card">
+                        <div class="proj-img"><img src="https://picsum.photos/seed/project-delta/600/380.jpg"
+                                alt="Project"></div>
+                        <div class="proj-body">
+                            <div class="proj-type">Mobile</div>
+                            <div class="proj-name">Project Title Four</div>
+                            <div class="proj-desc">Brief description of what this project does and what your
+                                contribution was.</div>
+                            <div class="proj-tags"><span>React Native</span><span>Firebase</span><span>Redux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="divider"></div>
+    </div>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="container">
+            <div class="reveal">
+                <p class="label">Experience</p>
+                <h2 class="heading">Where I've worked</h2>
+                <p class="sub mb-4">List your relevant positions. Keep each entry concise — role, company, dates, and a
+                    one-liner about what you did.</p>
+            </div>
+            <div class="reveal">
+                <div class="exp-item">
+                    <div class="exp-date">2022 — Present</div>
+                    <div class="exp-role">Job Title</div>
+                    <div class="exp-co">Company Name</div>
+                    <div class="exp-desc">One or two sentences about your responsibilities and impact in this role.
+                    </div>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-date">2020 — 2022</div>
+                    <div class="exp-role">Previous Job Title</div>
+                    <div class="exp-co">Previous Company</div>
+                    <div class="exp-desc">One or two sentences about your responsibilities and impact in this role.
+                    </div>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-date">2018 — 2020</div>
+                    <div class="exp-role">Earlier Job Title</div>
+                    <div class="exp-co">Earlier Company</div>
+                    <div class="exp-desc">One or two sentences about your responsibilities and impact in this role.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="divider"></div>
+    </div>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-5 reveal">
+                    <p class="label">Contact</p>
+                    <h2 class="heading">Get in touch</h2>
+                    <p class="sub mb-4">Replace these placeholders with your real info. Keep it simple — email,
+                        location, and socials are enough.</p>
+                    <div class="info-row"><i class="fas fa-envelope"></i> your@email.com</div>
+                    <div class="info-row"><i class="fas fa-location-dot"></i> Your City, Country</div>
+                    <div class="d-flex mt-3">
+                        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-7 reveal" style="transition-delay:0.1s;">
+                    <form onsubmit="handleSubmit(event)"
+                        style="padding:28px;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control" placeholder="Your name" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="you@email.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" placeholder="What's this about?" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="5" placeholder="Your message..." required
+                                    style="resize:vertical;"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-main" style="width:100%;justify-content:center;">
+                                    <i class="fas fa-paper-plane" style="font-size:0.8rem;"></i> Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <span>&copy; 2025 Your Name. Built as a portfolio template.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // Active nav on scroll
+        const secs = document.querySelectorAll('section[id]');
+        const links = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let cur = '';
+            secs.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+            links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+
+        // Form placeholder
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Form submitted! Connect this to your backend or service like Formspree.');
+            e.target.reset();
+        }
+    </script>
+</body>
+
+</html>
