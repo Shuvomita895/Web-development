@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cosy Corner | Library</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* --- NEW THEME: Paper & Ink (Warm/Vintage) --- */
+        :root {
+            /* Accent: Terracotta / Rust */
+            --primary-accent: #c0392b;
+
+            /* Dark: Charcoal / Deep Slate */
+            --dark-slate: #2c3e50;
+
+            /* Backgrounds: Cream / Paper White */
+            --paper-bg: #fdfbf7;
+            --paper-shade: #f5f0e6;
+
+            /* Text */
+            --text-main: #3d3d3d;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            /* Switched to Lato for a clean, rounder look */
+            background-color: var(--paper-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .navbar-brand {
+            font-family: 'Merriweather', serif;
+            /* Serif headers feel more "bookish" */
+            color: var(--dark-slate);
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--dark-slate);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff !important;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-accent) !important;
+            /* Rust highlight on hover */
+        }
+
+        /* Custom Button Style - Terracotta */
+        .btn-custom {
+            background-color: var(--primary-accent);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            /* Slightly sharper corners for a classic feel */
+            transition: var(--transition);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-custom:hover {
+            background-color: #a93226;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+        }
+
+        .btn-outline-custom {
+            color: var(--dark-slate);
+            border: 2px solid var(--dark-slate);
+        }
+
+        .btn-outline-custom:hover {
+            background-color: var(--dark-slate);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            /* Using a dark, moody slate gradient */
+            background: linear-gradient(to right, #2c3e50, #4b6584);
+            color: white;
+            padding: 100px 0 90px;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            color: white;
+            /* Override default dark slate */
+        }
+
+        .hero-content .lead {
+            color: #dcdde1;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+        }
+
+        /* Abstract decoration: Warm circle */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(192, 57, 43, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Cards General Style --- */
+        .book-card {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            /* Softer radius */
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-wrapper {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background-color: #eee;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .book-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-size: 1.15rem;
+            line-height: 1.3;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+
+        .book-rating {
+            color: #f1c40f;
+            /* Sunflower yellow */
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-footer {
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            padding: 1rem 1.5rem;
+            margin-top: auto;
+        }
+
+        /* --- Specific Section Tweaks --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: var(--dark-slate);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-accent);
+            /* Rust underline */
+            margin: 15px auto 0;
+        }
+
+        /* Already Read Badge - Dark style */
+        .read-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--dark-slate);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Free Books Section Background */
+        #free-books {
+            background-color: var(--paper-shade);
+            /* Slightly darker cream */
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .badge-free {
+            background-color: #f1c40f;
+            /* Yellow sticky note color */
+            color: #333;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--dark-slate);
+            color: #bdc3c7;
+            padding: 60px 0 30px;
+            border-top: 5px solid var(--primary-accent);
+        }
+
+        footer h5 {
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'Merriweather', serif;
+        }
+
+        footer a {
+            color: #95a5a6;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        footer a:hover {
+            color: var(--primary-accent);
+            padding-left: 5px;
+        }
+
+        /* --- Toast Notification --- */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1055;
+        }
+
+        .toast-bg {
+            background-color: var(--dark-slate) !important;
+            border-left: 4px solid var(--primary-accent);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+                padding: 70px 0;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-journal-richtext me-2"></i>The Cosy Corner</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#read-shelf">My Shelf</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#free-books">Free Reads</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recommendations">For You</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-custom" onclick="showSearchModal()">
+                            <i class="bi bi-search me-1"></i> Find Book
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 mb-3 fw-bold">Curated Stories.<br>Timeless Reads.</h1>
+                    <p class="lead mb-5">Your personal digital library. Track your journey through classics and discover
+                        hidden gems in a space designed for readers.</p>
+                    <div class="d-flex gap-3 hero-buttons">
+                        <a href="#free-books" class="btn btn-custom btn-lg px-4">Start Reading</a>
+                        <a href="#read-shelf" class="btn btn-outline-light btn-lg px-4"
+                            style="border: 2px solid rgba(255,255,255,0.3);">My Collection</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                    <!-- Hero Image - Warm/Cozy -->
+                    <img src="https://picsum.photos/seed/cozylibrary/600/450" alt="Library Illustration"
+                        class="img-fluid rounded-3 shadow-lg"
+                        style="opacity: 0.95; border: 8px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- My Books (Read Shelf) -->
+    <section id="read-shelf" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Books I've Read</h2>
+            <div class="row g-4" id="read-shelf-container">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Books Section -->
+    <section id="free-books" class="section-padding">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <h2 class="section-title text-start mb-0">Free Online Reads</h2>
+                <span class="badge badge-free fs-6 px-3 py-2">Public Domain</span>
+            </div>
+            <p class="text-center mb-5 text-muted" style="font-family: 'Lato', sans-serif;">Explore timeless classics.
+                No signup, no cost—just the joy of reading.</p>
+
+            <div class="row g-4" id="free-books-container">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations (Others might like) -->
+    <section id="recommendations" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">You Might Also Like</h2>
+            <div class="row g-4" id="recommendations-container">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter / Community -->
+    <section class="py-5 bg-white border-top">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <i class="bi bi-cup-hot text-danger display-4 mb-3"></i>
+                    <h3>Join the Reading Club</h3>
+                    <p>Get monthly book recommendations, reading lists, and literary discussions delivered to your
+                        inbox. Grab a coffee and stay tuned.</p>
+                    <div class="input-group mt-4 mb-2 w-75 mx-auto">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email address"
+                            style="border: 1px solid #ddd;">
+                        <button class="btn btn-custom" type="button" onclick="subscribeUser()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>The Cosy Corner</h5>
+                    <p class="small">A quiet place on the web for book lovers to organize their thoughts, track their
+                        progress, and find their next great adventure.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#read-shelf">My Shelf</a></li>
+                        <li><a href="#free-books">Free Books</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Fiction</a></li>
+                        <li><a href="#">Classics</a></li>
+                        <li><a href="#">Biography</a></li>
+                        <li><a href="#">Sci-Fi</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 fs-5">
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center small opacity-50">
+                &copy; 2023 The Cosy Corner Library. Designed with passion.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Search Collection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Title, Author, or Genre..."
+                            id="searchInput" style="background: #f9f9f9;">
+                        <button class="btn btn-custom" type="button" onclick="performSearch()">Search</button>
+                    </div>
+                    <div id="searchResults" class="mt-3">
+                        <!-- Results appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container">
+        <div id="liveToast" class="toast align-items-center text-white border-0 toast-bg" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Action successful!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // --- Data Sources ---
+        const myBooks = [
+            {
+                id: 1,
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                rating: 5,
+                genre: "Classic",
+                image: "https://picsum.photos/seed/gatsby/300/400",
+                desc: "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan."
+            },
+            {
+                id: 2,
+                title: "Sapiens",
+                author: "Yuval Noah Harari",
+                rating: 4,
+                genre: "History",
+                image: "https://picsum.photos/seed/sapiens/300/400",
+                desc: "A brief history of humankind, exploring how biology and history have defined us."
+            },
+            {
+                id: 3,
+                title: "Dune",
+                author: "Frank Herbert",
+                rating: 5,
+                genre: "Sci-Fi",
+                image: "https://picsum.photos/seed/dune/300/400",
+                desc: "Set on the desert planet Arrakis, it is the story of the boy Paul Atreides."
+            },
+            {
+                id: 4,
+                title: "Atomic Habits",
+                author: "James Clear",
+                rating: 4,
+                genre: "Self-Help",
+                image: "https://picsum.photos/seed/atomic/300/400",
+                desc: "Tiny changes, remarkable results. An easy & proven way to build good habits."
+            }
+        ];
+
+        const freeBooks = [
+            {
+                id: 101,
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                rating: 5,
+                image: "https://picsum.photos/seed/austen/300/400",
+                link: "#"
+            },
+            {
+                id: 102,
+                title: "The Adventures of Sherlock Holmes",
+                author: "Arthur Conan Doyle",
+                rating: 4,
+                image: "https://picsum.photos/seed/holmes/300/400",
+                link: "#"
+            },
+            {
+                id: 103,
+                title: "Moby Dick",
+                author: "Herman Melville",
+                rating: 4,
+                image: "https://picsum.photos/seed/moby/300/400",
+                link: "#"
+            },
+            {
+                id: 104,
+                title: "Frankenstein",
+                author: "Mary Shelley",
+                rating: 4,
+                image: "https://picsum.photos/seed/frank/300/400",
+                link: "#"
+            }
+        ];
+
+        const recommendedBooks = [
+            {
+                id: 201,
+                title: "1984",
+                author: "George Orwell",
+                rating: 5,
+                image: "https://picsum.photos/seed/1984/300/400",
+                reason: "Because you read Dune"
+            },
+            {
+                id: 202,
+                title: "Thinking, Fast and Slow",
+                author: "Daniel Kahneman",
+                rating: 4,
+                image: "https://picsum.photos/seed/thinking/300/400",
+                reason: "Popular in Non-Fiction"
+            },
+            {
+                id: 203,
+                title: "The Alchemist",
+                author: "Paulo Coelho",
+                rating: 4,
+                image: "https://picsum.photos/seed/alchemist/300/400",
+                reason: "Trending in Classics"
+            },
+            {
+                id: 204,
+                title: "Project Hail Mary",
+                author: "Andy Weir",
+                rating: 5,
+                image: "https://picsum.photos/seed/hailmary/300/400",
+                reason: "Best New Sci-Fi"
+            }
+        ];
+
+        // --- Functions to Render Books ---
+
+        function getStars(rating) {
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < rating) {
+                    starsHtml += '<i class="bi bi-star-fill"></i>';
+                } else {
+                    starsHtml += '<i class="bi bi-star"></i>';
+                }
+            }
+            return starsHtml;
+        }
+
+        function renderMyBooks() {
+            const container = document.getElementById('read-shelf-container');
+            container.innerHTML = myBooks.map(book => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="book-card">
+                        <div class="card-img-wrapper">
+                            <span class="read-badge"><i class="bi bi-check-lg me-1"></i>Read</span>
+                            <img src="${book.image}" class="card-img-top" alt="${book.title}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="book-title">${book.title}</h5>
+                            <p class="book-author mb-0">${book.author}</p>
+                            <div class="book-rating">
+                                ${getStars(book.rating)}
+                            </div>
+                            <p class="card-text small text-muted mt-2">${book.desc}</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-outline-custom btn-sm w-100" onclick="openBookDetails('${book.title}')">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFreeBooks() {
+            const container = document.getElementById('free-books-container');
+            container.innerHTML = freeBooks.map(book => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="book-card">
+                        <div class="card-img-wrapper">
+                            <img src="${book.image}" class="card-img-top" alt="${book.title}">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="book-title mb-0">${book.title}</h5>
+                            </div>
+                            <p class="book-author">${book.author}</p>
+                            <div class="book-rating">
+                                ${getStars(book.rating)}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="${book.link}" class="btn btn-custom btn-sm w-100" onclick="readBook('${book.title}')">
+                                <i class="bi bi-book me-1"></i> Read Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderRecommendations() {
+            const container = document.getElementById('recommendations-container');
+            container.innerHTML = recommendedBooks.map(book => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="book-card">
+                        <div class="card-img-wrapper">
+                            <img src="${book.image}" class="card-img-top" alt="${book.title}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="book-title">${book.title}</h5>
+                            <p class="book-author">${book.author}</p>
+                            <div class="book-rating">
+                                ${getStars(book.rating)}
+                            </div>
+                            <div class="mt-2">
+                                <span class="small text-danger fw-bold"><i class="bi bi-lightbulb-fill"></i> ${book.reason}</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-outline-custom btn-sm w-100" onclick="addToWishlist('${book.title}')">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- Interaction Logic ---
+        function showToast(message) {
+            const toastEl = document.getElementById('liveToast');
+            const toastBody = document.getElementById('toastMessage');
+            toastBody.textContent = message;
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        function readBook(title) {
+            event.preventDefault();
+            showToast(`Opening "${title}"...`);
+        }
+
+        function addToWishlist(title) {
+            showToast(`Added "${title}" to your wishlist.`);
+        }
+
+        function openBookDetails(title) {
+            showToast(`Viewing details for "${title}"`);
+        }
+
+        function subscribeUser() {
+            const input = document.querySelector('input[type="email"]');
+            if (input.value) {
+                showToast("Welcome to the club!");
+                input.value = "";
+            } else {
+                alert("Please enter an email address.");
+            }
+        }
+
+        // Search Modal Logic
+        const searchModal = new bootstrap.Modal(document.getElementById('searchModal'));
+
+        function showSearchModal() {
+            document.getElementById('searchResults').innerHTML = '';
+            searchModal.show();
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+
+            if (!query) return;
+
+            const allBooks = [...myBooks, ...freeBooks, ...recommendedBooks];
+            const results = allBooks.filter(book =>
+                book.title.toLowerCase().includes(query) ||
+                book.author.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                resultsDiv.innerHTML = `
+                    <h6 class="text-muted mb-3">${results.length} result(s) found:</h6>
+                    <ul class="list-group list-group-flush">
+                        ${results.map(book => `
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 border-bottom">
+                                <div>
+                                    <strong>${book.title}</strong> <small class="text-muted ms-2">by ${book.author}</small>
+                                </div>
+                                <button class="btn btn-sm btn-custom py-0" onclick="openBookDetails('${book.title}')">View</button>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            } else {
+                resultsDiv.innerHTML = `<div class="alert alert-secondary border-0 bg-light">No books found matching "${query}".</div>`;
+            }
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMyBooks();
+            renderFreeBooks();
+            renderRecommendations();
+        });
+
+    </script>
+</body>
+
+</html>
